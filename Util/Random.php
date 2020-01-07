@@ -35,13 +35,12 @@ class Random
      */
     public static function unsafeString(int $length = 1): string
     {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
+        $charset = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $random = '';
         for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
+            $random .= $charset[rand(0, strlen($charset) - 1)];
         }
-        return $randomString;
+        return $random;
     }
 
     /**
