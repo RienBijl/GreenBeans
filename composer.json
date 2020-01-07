@@ -11,7 +11,10 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "ext-openssl": "*",
+        "ext-json": "*"
+    },
     "autoload" : {
         "psr-4": {
             "GreenBeans\\": "/"
