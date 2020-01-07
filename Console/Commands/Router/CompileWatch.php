@@ -3,22 +3,24 @@
 namespace GreenBeans\Console\Commands\Router;
 
 use GreenBeans\Console\Command;
+use GreenBeans\Util\Base;
 
 class CompileWatch extends Command
 {
 
     private string $checksum = "";
-    public const BASE_DIR = __DIR__ . "/../../../../App/Controllers";
+    private string $baseDir;
 
     /**
      * @inheritDoc
      */
     public function run(array $args): void
     {
+        $this->baseDir = Base::get() . '/app/Controllers';
         $this->warn("Do not run this command in production, as it periodically locks the routes_c.json file.");
 
         do {
-            $checksum = $this->getDirectoryChecksum(self::BASE_DIR);
+            $checksum = $this->getDirectoryChecksum($this->baseDir);
             if ($checksum !== $this->checksum) {
                 $this->checksum = $checksum;
                 $this->compile();

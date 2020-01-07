@@ -5,12 +5,13 @@ namespace GreenBeans\Console\Commands\Router;
 use GreenBeans\Console\Command;
 use GreenBeans\Router\RouteCompiler;
 use GreenBeans\Util\ANSIColor;
+use GreenBeans\Util\Base;
 use GreenBeans\Util\Stopwatch;
 
 class Compile extends Command
 {
 
-    private const ROUTE_LOCATION = __DIR__ . '/../../../../../routes_c.json';
+    private string $routeLocation;
 
     /**
      * @inheritDoc
@@ -18,7 +19,7 @@ class Compile extends Command
     public function run(array $args): void
     {
         $stopwatch = new Stopwatch();
-
+        $this->routeLocation = Base::get() . '/routes_c.json';
         $routeCompiler = null;
 
         try {
@@ -31,7 +32,7 @@ class Compile extends Command
                 $routes = $routes ?? [];
                 $routesAsJson = json_encode($routes, JSON_PRETTY_PRINT);
 
-                file_put_contents(self::ROUTE_LOCATION, $routesAsJson, LOCK_EX);
+                file_put_contents($this->routeLocation, $routesAsJson, LOCK_EX);
 
                 $this->success('Renewed route declarations in ' . $stopwatch->stopAsMilli() . 'ms');
             }

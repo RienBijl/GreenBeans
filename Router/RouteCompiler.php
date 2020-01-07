@@ -3,6 +3,7 @@
 namespace GreenBeans\Router;
 
 use GreenBeans\Exceptions\RouterException;
+use GreenBeans\Util\Base;
 use GreenBeans\Util\StringUtil;
 
 class RouteCompiler
@@ -21,13 +22,14 @@ class RouteCompiler
         ''   => '[^/\.]++'
     ];
 
-    public const BASE_DIR = __DIR__ . "/../../../App/Controllers";
+    public string $baseDir;
 
     /**
      * RouteCompiler constructor.
      */
     public function __construct()
     {
+        $this->baseDir = Base::get() . "/App/Controllers";
         $this->filesToScan = $this->getEligibleFiles();
         foreach ($this->filesToScan as $fileToScan) {
             $this->runTokenizer($fileToScan);
@@ -51,7 +53,7 @@ class RouteCompiler
      */
     private function runTokenizer(string $fileToScan): void
     {
-        $path = realpath(self::BASE_DIR . '/' . $fileToScan);
+        $path = realpath($this->baseDir . '/' . $fileToScan);
         $file = preg_replace('/\\.[^.\\s]{3,4}$/', '', $fileToScan);
         $routes = (new RoutesTokenizer(file_get_contents($path)))->getResults();
         foreach ($routes as $route) {
@@ -109,7 +111,7 @@ class RouteCompiler
      */
     private function getEligibleFiles(): array
     {
-        $files = scandir(self::BASE_DIR);
+        $files = scandir($this->baseDir);
         $eligible = [];
         foreach ($files as $file) {
             if (StringUtil::endsWith($file, ".php")) {
