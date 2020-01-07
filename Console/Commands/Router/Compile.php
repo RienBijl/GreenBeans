@@ -10,7 +10,7 @@ use GreenBeans\Util\Stopwatch;
 class Compile extends Command
 {
 
-    private const ROUTE_LOCATION = __DIR__ . '/../../../../routes_c.json';
+    private const ROUTE_LOCATION = __DIR__ . '/../../../../../routes_c.json';
 
     /**
      * @inheritDoc
