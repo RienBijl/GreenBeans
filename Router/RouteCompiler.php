@@ -21,7 +21,7 @@ class RouteCompiler
         ''   => '[^/\.]++'
     ];
 
-    public const BASE_DIR = __DIR__ . "/../../../../App/Controllers";
+    public const BASE_DIR = __DIR__ . "/../../../../../App/Controllers";
 
     /**
      * RouteCompiler constructor.
