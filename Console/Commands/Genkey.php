@@ -14,7 +14,7 @@ class Genkey extends Command
      */
     public function run(array $args): void
     {
-        file_put_contents(Base::get() . '/.key', Random::safeString(150));
+        file_put_contents(Base::get() . '/.key', Random::safeString(50));
         parent::success("Generated new key");
     }
 
