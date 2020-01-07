@@ -3,6 +3,7 @@
 namespace GreenBeans\Console\Commands;
 
 use GreenBeans\Console\Command;
+use GreenBeans\Util\Base;
 
 class Serveroot extends Command
 {
@@ -18,7 +19,7 @@ class Serveroot extends Command
             $this->host = escapeshellarg($args[1]);
         }
 
-        chdir(__DIR__ . '/../../../');
+        chdir(Base::get());
 
         $this->success("Starting Frappuccino development server");
         $this->warn("Server is facing root directory");

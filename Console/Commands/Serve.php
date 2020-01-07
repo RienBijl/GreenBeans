@@ -3,6 +3,7 @@
 namespace GreenBeans\Console\Commands;
 
 use GreenBeans\Console\Command;
+use GreenBeans\Util\Base;
 
 class Serve extends Command
 {
@@ -18,7 +19,7 @@ class Serve extends Command
             $this->host = escapeshellarg($args[1]);
         }
 
-        chdir(__DIR__ . '/../../../public/');
+        chdir(Base::get() . '/public/');
 
         $this->success("Starting Frappuccino development server");
         passthru(PHP_BINARY . " -S {$this->host} 2>&1");
