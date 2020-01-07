@@ -5,7 +5,6 @@ namespace GreenBeans\Console\Commands;
 use GreenBeans\Console\Command;
 use GreenBeans\Util\Base;
 use GreenBeans\Util\Encryption;
-use GreenBeans\Util\Random;
 
 class Genkey extends Command
 {
@@ -16,11 +15,9 @@ class Genkey extends Command
      */
     public function run(array $args): void
     {
-        do {
-            $safeString = Random::safeString(32 / 2);
-        } while (Encryption::getEntropy($safeString) < 4);
+        $key = Encryption::getSafeKey();
 
-        file_put_contents(Base::get() . '/.key', $safeString);
+        file_put_contents(Base::get() . '/.key', $key);
         parent::success("Generated new application key");
     }
 
