@@ -1,0 +1,19 @@
+{
+    "name": "rien/green-beans",
+    "description": "Kernel and Utility for Frappuccino in the GreenBeans namespace",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rien",
+            "email": "me@rienbijl.nl"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload" : {
+        "psr-4": {
+            "GreenBeans\\": "/"
+        }
+    }
+}
