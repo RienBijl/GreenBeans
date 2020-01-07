@@ -18,7 +18,7 @@ class Encryption
     public static function encrypt(string $information, string $key, int $iv = 16): string
     {
         if (self::getEntropy($key) < 4) {
-            throw new EncryptionException("Key did not have enough entropy, try using getSafeKey()");
+            throw new EncryptionException("Insufficient entropy in key, try using getSafeKey() or the application key");
         }
         return openssl_encrypt(
             self::pksc7Pad($information, 16),
