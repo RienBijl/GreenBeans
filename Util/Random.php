@@ -51,7 +51,7 @@ class Random
      */
     public static function safeString(int $bytes = 100): string
     {
-        return bin2hex(self::bytes($bytes));
+        return base64_encode(self::bytes($bytes));
     }
 
     /**
