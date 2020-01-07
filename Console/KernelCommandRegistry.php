@@ -3,6 +3,7 @@
 namespace GreenBeans\Console;
 
 use GreenBeans\Console\Commands\Brew\Provider;
+use GreenBeans\Console\Commands\Genkey;
 use GreenBeans\Console\Commands\Router\Compile;
 use GreenBeans\Console\Commands\Router\CompileWatch;
 use GreenBeans\Console\Commands\Serve;
@@ -25,6 +26,9 @@ class KernelCommandRegistry
 
         // routes compile
         "router|compile" => Compile::class,
-        "router|compile:watch" => CompileWatch::class
+        "router|compile:watch" => CompileWatch::class,
+
+        // genkey
+        "genkey" => Genkey::class,
     ];
 }
