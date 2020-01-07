@@ -16,5 +16,10 @@
         "psr-4": {
             "GreenBeans\\": "/"
         }
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "@php beans genkey"
+        ]
     }
 }
