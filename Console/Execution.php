@@ -23,7 +23,7 @@ class Execution
      * @param $args
      * @param $basedir
      */
-    public function __construct(string $args, string $basedir)
+    public function __construct(array $args, string $basedir)
     {
         if (php_sapi_name() === 'cli') {
             set_exception_handler([$this, 'catchException']);
