@@ -14,15 +14,22 @@ class Execution
     private $matchers = null;
 
     /**
+     * @var string
+     */
+    public $basedir = __DIR__;
+
+    /**
      * Execution constructor.
      * @param $args
+     * @param $basedir
      */
-    public function __construct($args)
+    public function __construct(string $args, string $basedir)
     {
         if (php_sapi_name() === 'cli') {
             set_exception_handler([$this, 'catchException']);
         }
 
+        $this->basedir = $basedir;
         $args ??= [];
 
         $this->matchers = $this->getMatchers();
