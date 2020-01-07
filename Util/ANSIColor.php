@@ -1,10 +1,10 @@
 <?php
 
-namespace Kernel\Util;
+namespace GreenBeans\Util;
 
 /**
  * Class ANSIColor
- * @package Kernel\Util
+ * @package GreenBeans\Util
  * @author Rien Bijl <me at rienbijl.nl>
  */
 class ANSIColor

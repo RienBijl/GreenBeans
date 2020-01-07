@@ -1,6 +1,6 @@
 <?php
 
-namespace Kernel\Util;
+namespace GreenBeans\Util;
 
 class StringUtil
 {

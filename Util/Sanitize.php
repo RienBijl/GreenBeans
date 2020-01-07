@@ -1,6 +1,6 @@
 <?php
 
-namespace Kernel\Util\Sanitize;
+namespace GreenBeans\Util\Sanitize;
 
 /**
  * Serialize to only return alphanumerical values
