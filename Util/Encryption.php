@@ -11,14 +11,18 @@ class Encryption
      * Encrypt a piece of information
      * @param string $information
      * @param string $key
-     * @param int $iv
+     * @param string $iv
      * @return string
      * @throws EncryptionException
+     * @throws \Exception
      */
-    public static function encrypt(string $information, string $key, int $iv = 16): string
+    public static function encrypt(string $information, string $key, string $iv = null): string
     {
         if (self::getEntropy($key) < 4) {
             throw new EncryptionException("Insufficient entropy in key, try using getSafeKey() or the application key");
+        }
+        if ($iv === null) {
+            $iv = Random::bytes(16);
         }
         return openssl_encrypt(
             self::pksc7Pad($information, 16),
@@ -33,11 +37,15 @@ class Encryption
      * Decrypt a piece of information
      * @param string $information
      * @param string $key
-     * @param int $iv
+     * @param string $iv
      * @return string
+     * @throws \Exception
      */
-    public static function decrypt(string $information, string $key, int $iv = 16): string
+    public static function decrypt(string $information, string $key, string $iv = null): string
     {
+        if ($iv === null) {
+            $iv = Random::bytes(16);
+        }
         return self::pksc7Unpad(openssl_decrypt(
             $information,
             'AES-256-CBC',
