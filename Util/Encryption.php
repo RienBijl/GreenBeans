@@ -65,7 +65,7 @@ class Encryption
      * @param string $information
      * @return float
      */
-    public static function getEntropy(string $information): double
+    public static function getEntropy(string $information): float
     {
         $entropy = 0;
         $size = strlen($information);
