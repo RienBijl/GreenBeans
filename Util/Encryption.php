@@ -17,8 +17,12 @@ class Encryption
      * @throws EncryptionException
      * @throws \Exception
      */
-    public static function encrypt(string $information, string $key = null, string $iv = null, string $method = "AES-256-CBC"): string
-    {
+    public static function encrypt(
+        string $information,
+        string $key = null,
+        string $iv = null,
+        string $method = "AES-256-CBC"
+    ): string {
         if ($key === null) {
             $key = static::getAppKey();
         }
@@ -47,8 +51,12 @@ class Encryption
      * @return string
      * @throws EncryptionException
      */
-    public static function encryptPlain(string $information, string $key = null, string $iv = null, string $method = "AES-256-CBC"): string
-    {
+    public static function encryptPlain(
+        string $information,
+        string $key = null,
+        string $iv = null,
+        string $method = "AES-256-CBC"
+    ): string {
         if ($key === null) {
             $key = static::getAppKey();
         }
@@ -76,8 +84,12 @@ class Encryption
      * @return string
      * @throws \Exception
      */
-    public static function decrypt(string $information, string $key = null, string $iv = null, string $method = "AES-256-CBC"): string
-    {
+    public static function decrypt(
+        string $information,
+        string $key = null,
+        string $iv = null,
+        string $method = "AES-256-CBC"
+    ): string {
         if ($key === null) {
             $key = static::getAppKey();
         }
@@ -103,8 +115,12 @@ class Encryption
      * @return string
      * @throws \Exception
      */
-    public static function decryptPlain(string $information, string $key = null, string $iv = null, string $method = "AES-256-CBC"): string
-    {
+    public static function decryptPlain(
+        string $information,
+        string $key = null,
+        string $iv = null,
+        string $method = "AES-256-CBC"
+    ): string {
         if ($key === null) {
             $key = static::getAppKey();
         }
