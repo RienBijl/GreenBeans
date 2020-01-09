@@ -33,9 +33,15 @@ class Encryption
      * @param string $expected
      * @param string $value
      * @return bool
+     * @throws \Exception
      */
     public function validate(string $expected, string $value): bool
     {
+        if (strlen($expected) !== strlen($value)) {
+            $value = Random::safeStringLength(strlen($expected));
+        } else {
+            Random::safeStringLength(strlen($expected));
+        }
         return hash_equals($expected, $value);
     }
 
