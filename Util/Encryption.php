@@ -34,7 +34,8 @@ class Encryption
      * @param string $value
      * @return bool
      */
-    public function validate(string $expected, string $value): bool {
+    public function validate(string $expected, string $value): bool
+    {
         return hash_equals($expected, $value);
     }
 
