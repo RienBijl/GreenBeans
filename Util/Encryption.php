@@ -71,7 +71,7 @@ class Encryption
         if (!file_exists(Base::get() . "\.key.crypto")) {
             throw new EncryptionException("Installation does not have valid application key, run `php beans genkey`");
         } else {
-            return file_get_contents(Base::get() . ".\key.crypto");
+            return file_get_contents(Base::get() . "\.key.crypto");
         }
     }
 
