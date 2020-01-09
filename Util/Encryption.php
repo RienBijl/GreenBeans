@@ -8,6 +8,25 @@ class Encryption
 {
 
     /**
+     * Sign and encrypt a string using HMAC
+     * @param string $information
+     * @param string|null $key
+     * @param string $method
+     * @return string
+     * @throws EncryptionException
+     */
+    public function hmac(string $information, string $key = null, string $method = "sha256"): string
+    {
+        if ($key === null) {
+            $key = static::getAppKey();
+        }
+        if (self::getEntropy($key) < 4) {
+            throw new EncryptionException("Insufficient entropy in key, try using getSafeKey() or the application key");
+        }
+        return hash_hmac($method, $information, $key);
+    }
+
+    /**
      * Encrypt a piece of information
      * @param string $information
      * @param string $key
