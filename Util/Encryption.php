@@ -12,11 +12,12 @@ class Encryption
      * @param string $information
      * @param string $key
      * @param string $iv
+     * @param string $method
      * @return string
      * @throws EncryptionException
      * @throws \Exception
      */
-    public static function encrypt(string $information, string $key = null, string $iv = null): string
+    public static function encrypt(string $information, string $key = null, string $iv = null, string $method = "AES-256-CBC"): string
     {
         if ($key === null) {
             $key = static::getAppKey();
@@ -30,7 +31,36 @@ class Encryption
         $seed = Random::safeStringLength(10);
         return openssl_encrypt(
             self::pksc7Pad($seed . $information . $seed, 16),
-            'AES-256-CBC',
+            $method,
+            $key,
+            0,
+            $iv
+        );
+    }
+
+    /**
+     * Encrypt without padding or seeding, for more finetuning
+     * @param string $information
+     * @param string|null $key
+     * @param string|null $iv
+     * @param string $method
+     * @return string
+     * @throws EncryptionException
+     */
+    public static function encryptPlain(string $information, string $key = null, string $iv = null, string $method = "AES-256-CBC"): string
+    {
+        if ($key === null) {
+            $key = static::getAppKey();
+        }
+        if ($iv === null) {
+            $iv = static::getAppIV();
+        }
+        if (self::getEntropy($key) < 4) {
+            throw new EncryptionException("Insufficient entropy in key, try using getSafeKey() or the application key");
+        }
+        return openssl_encrypt(
+            $information,
+            $method,
             $key,
             0,
             $iv
@@ -42,10 +72,11 @@ class Encryption
      * @param string $information
      * @param string $key
      * @param string $iv
+     * @param string $method
      * @return string
      * @throws \Exception
      */
-    public static function decrypt(string $information, string $key = null, string $iv = null): string
+    public static function decrypt(string $information, string $key = null, string $iv = null, string $method = "AES-256-CBC"): string
     {
         if ($key === null) {
             $key = static::getAppKey();
@@ -55,12 +86,38 @@ class Encryption
         }
         $decrypted = self::pksc7Unpad(openssl_decrypt(
             $information,
-            'AES-256-CBC',
+            $method,
             $key,
             0,
             $iv
         ));
         return strrev(substr(strrev(substr($decrypted, 10)), 10));
+    }
+
+    /**
+     * Decrypt a piece of information withour padding or seeding, for more finetuning
+     * @param string $information
+     * @param string $key
+     * @param string $iv
+     * @param string $method
+     * @return string
+     * @throws \Exception
+     */
+    public static function decryptPlain(string $information, string $key = null, string $iv = null, string $method = "AES-256-CBC"): string
+    {
+        if ($key === null) {
+            $key = static::getAppKey();
+        }
+        if ($iv === null) {
+            $iv = static::getAppIV();
+        }
+        return openssl_decrypt(
+            $information,
+            $method,
+            $key,
+            0,
+            $iv
+        );
     }
 
     /**
