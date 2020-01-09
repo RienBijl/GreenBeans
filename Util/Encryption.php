@@ -27,6 +27,18 @@ class Encryption
     }
 
     /**
+     * Validates two hashes (or hmac's)
+     * NOTICE: ALWAYS use this function over equal or identical operator to mitigate timing attacks
+     *
+     * @param string $expected
+     * @param string $value
+     * @return bool
+     */
+    public function validate(string $expected, string $value): bool {
+        return hash_equals($expected, $value);
+    }
+
+    /**
      * Encrypt a piece of information
      * @param string $information
      * @param string $key
