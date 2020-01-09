@@ -27,8 +27,9 @@ class Encryption
         if (self::getEntropy($key) < 4) {
             throw new EncryptionException("Insufficient entropy in key, try using getSafeKey() or the application key");
         }
+        $seed = Random::safeStringLength(10);
         return openssl_encrypt(
-            self::pksc7Pad($information . uniqid(), 16),
+            self::pksc7Pad($seed . $information . $seed, 16),
             'AES-256-CBC',
             $key,
             0,
@@ -52,13 +53,14 @@ class Encryption
         if ($iv === null) {
             $iv = static::getAppIV();
         }
-        return substr(self::pksc7Unpad(openssl_decrypt(
+        $decrypted = self::pksc7Unpad(openssl_decrypt(
             $information,
             'AES-256-CBC',
             $key,
             0,
             $iv
-        )), -13);
+        ));
+        return strrev(substr(strrev(substr($decrypted, 10)), 10));
     }
 
     /**

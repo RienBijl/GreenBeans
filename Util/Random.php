@@ -55,6 +55,21 @@ class Random
     }
 
     /**
+     * Generates cryptographically secure pseudo random string by strlen
+     * @param int $length
+     * @return string
+     * @throws \Exception
+     */
+    public static function safeStringLength(int $length): string
+    {
+        return substr(
+            bin2hex(self::bytes((int)ceil($length / 2))),
+            0,
+            $length
+        );
+    }
+
+    /**
      * Generates cryptographically secure pseudo random bytes
      * @param int $bytes
      * @return string
