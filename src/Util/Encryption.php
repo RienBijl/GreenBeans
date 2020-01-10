@@ -15,7 +15,7 @@ class Encryption
      * @return string
      * @throws EncryptionException
      */
-    public function hmac(string $information, string $key = null, string $method = "sha256"): string
+    public static function hmac(string $information, string $key = null, string $method = "sha256"): string
     {
         if ($key === null) {
             $key = static::getAppKey();
@@ -35,7 +35,7 @@ class Encryption
      * @return bool
      * @throws \Exception
      */
-    public function validate(string $expected, string $value): bool
+    public static function validate(string $expected, string $value): bool
     {
         if (strlen($expected) !== strlen($value)) {
             $value = Random::safeStringLength(strlen($expected));

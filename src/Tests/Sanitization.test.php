@@ -1,8 +1,9 @@
 <?php
 
-namespace Kernel\Test;
+namespace GreenBeans\Tests;
 
 use PHPUnit\Framework\TestCase;
+
 use function Kernel\Util\Sanitize\alphanum;
 use function Kernel\Util\Sanitize\quotes;
 

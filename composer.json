@@ -2,7 +2,6 @@
     "name": "rien/green-beans",
     "description": "Kernel and Utility for Frappuccino in the GreenBeans namespace",
     "type": "library",
-    "version": 0.1,
     "license": "MIT",
     "authors": [
         {
@@ -14,6 +13,9 @@
     "require": {
         "ext-openssl": "*",
         "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8"
     },
     "autoload" : {
         "psr-4": {
