@@ -18,9 +18,9 @@ class Genkey extends Command
     {
         $key = Encryption::getSafeKey();
 
-        file_put_contents(Base::get() . '/.key.crypto', $key);
+        file_put_contents(Base::get() . '/storage/secret/.key.crypto', $key);
         parent::success("Generated new application key");
-        file_put_contents(Base::get() . '/.initialization_vector.crypto', Random::bytes(16));
+        file_put_contents(Base::get() . '/storage/secret/.initialization_vector.crypto', Random::bytes(16));
         parent::success("Generated new initialization vector");
     }
 

@@ -181,10 +181,10 @@ class Encryption
      */
     public static function getAppKey(): ?string
     {
-        if (!file_exists(Base::get() . "\.key.crypto")) {
+        if (!file_exists(Base::get() . "\storage\secret\.key.crypto")) {
             throw new EncryptionException("Installation does not have valid application key, run `php beans genkey`");
         } else {
-            return file_get_contents(Base::get() . "\.key.crypto");
+            return file_get_contents(Base::get() . "\storage\secret\.key.crypto");
         }
     }
 
@@ -195,10 +195,10 @@ class Encryption
      */
     public static function getAppIV(): ?string
     {
-        if (!file_exists(Base::get() . "\.initialization_vector.crypto")) {
+        if (!file_exists(Base::get() . "\storage\secret\.initialization_vector.crypto")) {
             throw new EncryptionException("Installation does not have valid application IV, run `php beans genkey`");
         } else {
-            return file_get_contents(Base::get() . "\.initialization_vector.crypto");
+            return file_get_contents(Base::get() . "\storage\secret\.initialization_vector.crypto");
         }
     }
 
