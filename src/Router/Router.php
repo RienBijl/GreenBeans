@@ -66,7 +66,7 @@ class Router
      * @param string $baseUrl
      * @return string
      */
-    public function setBaseUrl(string $baseUrl): string
+    public function setBaseUrl(string $baseUrl)
     {
         $this->baseUrl = $baseUrl;
     }
