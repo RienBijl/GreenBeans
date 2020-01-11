@@ -17,7 +17,7 @@ class Router
      * Request parameters
      * @var array
      */
-    private array $parameters;
+    private ?array $parameters = null;
 
     /**
      * Request URL
@@ -92,29 +92,27 @@ class Router
      * Match routes
      * @return array
      */
-    public function match(): array
+    public function match(): ?array
     {
         $url = $this->getRealUrl($this->url);
         $lastRequestUrlChar = $url[strlen($url) - 1];
 
         foreach ($this->routes as $route) {
             $match = false;
-            if (!$route['http']['method'] !== $this->method) {
+            if ($route['http']['method'] !== $this->method) {
                 continue;
             }
             if (isset($route['regex'][0]) && $route['regex'][0] === '@') {
                 // Regex starts with a delimiter!
+                echo '1';
                 $pattern = '`' . substr($route, 1) . '`u';
                 $match = preg_match($pattern, $url, $this->parameters) === 1;
-            } elseif (($position = strpos($route, '[')) === false) {
+            } elseif (($position = strpos($route["regex"], '[')) === false) {
                 // Safe to use we have no parameters, string comparison will do!
-                $match = strcmp($url, $route["regex"]) === 0;
+                $match = strcmp(rtrim($url, '/'), rtrim($route["http"]["route"], '/')) === 0;
             } else {
                 //  longest non-param string with url before regex matching
-                if (
-                    strncmp($url, $route, $position) !== 0 &&
-                    ($lastRequestUrlChar === '/' || $route[$position - 1] !== '/')
-                ) {
+                if (!preg_match($route["regex"], $url)) {
                     continue;
                 }
 
