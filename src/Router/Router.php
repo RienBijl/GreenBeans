@@ -79,7 +79,7 @@ class Router
     public function getRealUrl(string $url): string
     {
         // Remove basepath from url
-        $url = substr($url, strlen($this->basePath));
+        $url = substr($url, strlen($this->baseUrl));
 
         // Remove GET query
         if (($strpos = strpos($url, '?')) !== false) {
