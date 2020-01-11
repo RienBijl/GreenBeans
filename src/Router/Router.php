@@ -58,7 +58,7 @@ class Router
         if (!file_exists($path)) {
             throw new FileNotFoundException("Could not find routes [" . realpath($path) . "]");
         }
-        $this->routes = json_decode(file_get_contents($path));
+        $this->routes = json_decode(file_get_contents($path), true);
     }
 
     /**
