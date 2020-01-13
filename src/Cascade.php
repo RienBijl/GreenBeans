@@ -2,6 +2,7 @@
 
 namespace GreenBeans;
 
+use GreenBeans\HTTP\Request;
 use GreenBeans\HTTP\Response;
 
 class Cascade
